@@ -1,6 +1,7 @@
 from historico import Historico
 from cliente import Cliente
 
+
 class Conta:
     __slots__ = ['__numero', '__titular', '__saldo', '__limite', '__historico']
     __total_contas = 0
@@ -12,6 +13,10 @@ class Conta:
         self.__limite = limite
         self.__historico = Historico()
         Conta.incrementa_total_contas()
+
+    def __str__(self):
+        return 'Objeto do tipo: {}\nAtributos: \nNumero: {}\nTitular: {}\nSaldo: {}\nLimite: {}\n'.format(
+            self.__class__.__name__, self.numero, self.titular.nome, self.saldo, self.limite)
 
     @property
     def numero(self):
@@ -73,9 +78,14 @@ class Conta:
             conta_destino.saldo += valor
             self.historico.transacoes.append(
                 'Transferência realizada para a conta número {} no valor de R${:.2f}'
-                .format(conta_destino.numero, valor))
+                    .format(conta_destino.numero, valor))
             conta_destino.historico.transacoes.append(
                 'Transferência recebida da conta número {} no valor de R${:.2f}'
-                .format(self.numero, valor))
+                    .format(self.numero, valor))
         else:
             print('Saldo insuficiente!')
+
+    def atualiza(self, taxa):
+        rendimento = self.saldo * taxa
+        self.saldo += rendimento
+        return rendimento
