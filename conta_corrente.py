@@ -13,10 +13,9 @@ class ContaCorrente(Conta):
     def incrementa_total_contas(cls):
         cls.__total_contas += 1
 
-    def atualiza(self, taxa):
-        taxa_total = taxa * 2
-        super().atualiza(taxa_total)
-        return self.saldo * taxa_total
+    def atualiza(self, taxa, fator_de_aumento=2):
+        super().atualiza(taxa, fator_de_aumento)
+        return self.saldo
 
     def deposita(self, valor):
         valor_final = valor - 0.1

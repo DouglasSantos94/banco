@@ -1,4 +1,5 @@
 from atualizador_de_contas import AtualizadorDeContas
+from banco import Banco
 from conta import Cliente, Conta
 from conta_corrente import ContaCorrente
 from conta_poupanca import ContaPoupanca
@@ -41,6 +42,7 @@ if __name__ == '__main__':
 '''
 
 if __name__ == '__main__':
+    banco = Banco()
     cliente1 = Cliente('Douglas', '123')
     cliente2 = Cliente('Jaina', '456')
     cliente3 = Cliente('Mia', '789')
@@ -51,16 +53,20 @@ if __name__ == '__main__':
     cp = ContaPoupanca(cliente3, 1000.0)
     cc2 = ContaCorrente(cliente4, 1500)
 
-    #c.atualiza(0.01)
-    ##cc.atualiza(0.01)
-    #cp.atualiza(0.01)
-    #cc.deposita(20)
+    banco.adiciona(c)
+    banco.adiciona(cc)
+    banco.adiciona(cp)
+    banco.adiciona(cc2)
+
+    print('Total de contas: ', banco.pega_total_contas())
+    banco.pega_conta(2)
+
     adc = AtualizadorDeContas(0.01)
 
-    adc.roda(c)
-    adc.roda(cc)
-    adc.roda(cp)
+    for conta in banco.lista_contas:
+        adc.roda(conta)
+
     print(adc.saldo_total)
-    #print(c.saldo)
-    #print(cc.saldo)
-    #print(cp.saldo)
+    print(c.saldo)
+    print(cc.saldo)
+    print(cp.saldo)

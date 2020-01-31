@@ -85,7 +85,7 @@ class Conta:
         else:
             print('Saldo insuficiente!')
 
-    def atualiza(self, taxa):
-        rendimento = self.saldo * taxa
+    def atualiza(self, taxa, fator_de_aumento=1):
+        rendimento = self.saldo * (taxa * fator_de_aumento)
         self.saldo += rendimento
-        return rendimento
+        return self.saldo

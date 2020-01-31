@@ -1,5 +1,7 @@
-class Funcionario:
+from abc import ABC, abstractmethod
 
+
+class Funcionario(ABC):
     __slots__ = ['__salario', '__cpf', '__nome']
 
     def __init__(self, nome, cpf, salario):
@@ -23,5 +25,6 @@ class Funcionario:
     def nome(self):
         return self.__nome
 
+    @abstractmethod
     def bonificacao(self):
-        return self.salario * 0.1
+        pass
